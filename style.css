@@ -10,3 +10,77 @@
 #right-container { 
  border: 1px solid pink;
 }
+/* .container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+} */
+
+.footer-1 {
+    display: flex;
+    justify-content: space-between;
+    flex: 1 0 0%;
+}
+
+.left-column {
+    display: flex;
+    justify-content: space-between;
+}
+
+.spotify-logo {
+    width: 100px;
+    height: 25%;
+}
+
+.ul-footer {
+    list-style-type: none;
+    margin: 0;
+    padding: 0 2px;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+    width: 200px;
+    font-weight: 700;
+}
+
+.li-edit {
+    line-height: 1.5;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+    padding: 3px 0 15px;
+    font-weight: 700;
+}
+
+.li-edit:hover {
+    color: #1DA1F2;
+    text-decoration: none;
+}
+
+.right-column {
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 15px 0 auto;
+}
+
+.footer-2 {
+    justify-content: flex-end;
+    display: flex;
+    color: gray;
+    margin-right: 20px;
+    height: 10%;
+    ;
+}
+
+.footer-text {
+    color: gray;
+    text-decoration: none;
+    font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+.left-column-2 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 60%;
+    font-size: 12px;
+    margin-right: 10%;
+    
