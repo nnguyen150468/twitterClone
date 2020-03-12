@@ -1,0 +1,12 @@
+#largest-container {
+    border: 1px solid blue;
+}
+
+#left-container {
+    border: 1px solid green;
+    height: 500px;
+}
+
+#right-container { 
+ border: 1px solid pink;
+}
