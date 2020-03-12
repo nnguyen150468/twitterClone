@@ -1,0 +1,38 @@
+//HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <textarea id="contentBox" placeholder="type the content"></textarea>
+    <button>Tweet</button>
+    <div id="charCountArea">140chars</div>
+    <script src="main.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+//JavaScriptlet textArea = document.getElementById("contentBox")
+
+
+let countLetter = () => {
+    let remain = 140 - textArea.value.length;
+    document.getElementById('charCountArea').innerHTML=`${remain} characters left`;
+
+    if(remain < 0){
+        document.getElementById('charCountArea').innerHTML=`${remain} characters left`;
+    } else {
+        document.getElementById('charCountArea').innerHTML=`${remain} characters left`;
+    }
+}
+
+textArea.addEventListener("input", countLetter);
+
+
