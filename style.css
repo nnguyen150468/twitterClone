@@ -11,6 +11,16 @@
  border: 1px solid pink;
 }
 
+
+/* .footer {
+    margin-top: 6em;
+    position: fixed;
+    bottom: 0;
+    padding-top: 2em;
+    background-color: purple;
+    width: 100%;
+} */
+
 .footer-1 {
     display: flex;
     justify-content: space-between;
@@ -70,3 +80,4 @@
     width: 60%;
     font-size: 12px;
     margin-right: 10%;
+}
