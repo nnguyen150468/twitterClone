@@ -9,6 +9,7 @@ let tweetList = [];
 //set the Areas
 let userNameInputArea = document.getElementById("userNameInputArea");
 let contentInputArea = document.getElementById("contentInputArea");
+document.getElementById("tweetArea").innerHTML="saysum"
 // let userName;
 
 // //save data to local storage
@@ -26,9 +27,11 @@ let contentInputArea = document.getElementById("contentInputArea");
 //     }
 // }
 
-
+let addButton = document.getElementById("tweetButton")
+addButton.addEventListener("click",addTweet);
 //Add a tweet
-function addTweet(){
+function addTweet(e){
+    e.preventDefault()
     let userName = userNameInputArea.value;
     let content = contentInputArea.value;
     let tweet = {
