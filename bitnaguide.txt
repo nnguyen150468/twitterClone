@@ -36,3 +36,76 @@ let countLetter = () => {
 textArea.addEventListener("input", countLetter);
 
 
+
+// Retweet Bitna
+let id;
+
+let tweetList=[];
+
+
+// embedding approach
+function addTweet() {
+    let tweet = {
+        id: id,
+        contents: textArea.value,
+    }
+    let contents = textArea.value;
+    tweetList.push(contents);
+
+    console.log('twistlist: ',tweetList);
+    render(tweetList)
+    id++;
+}
+
+
+function retweet(originID){
+    let originTweet = tweetList.find((item) => item.id == originID);
+    console.log(originTweet)
+
+    let retweetObject = {
+        id: id,
+        contents: originTweet.contents,
+        originalTweetID: originID
+    }
+
+    tweetList.push(retweetObject);
+
+    console.log("after retweet, tweetlist will be:", tweetList);
+
+    //add retweet information to original tweet
+    originTweet.retweets.push(id);
+    id++;
+
+    render(tweetList)
+
+}
+
+function render(array) {
+    let htmlForTweet=array.map((item) => {
+        return `<li>${item.contents} <button>like</button> <button onclick="retweet(${item.id})">Retweet</button>
+        <button onclick="deleteTweet()">Delete</button>
+        </li>`
+    })
+}
+
+function deleteTweet(deleteID){
+    //find the tweet that you want to delete
+    let deleteTweetObject = tweetList.find((item) => item.id==deleteID);
+
+    //if the tweet you want to delete has retweets? then delete all retweets
+    if(deleteTweetObject.retweets !=null){
+        tweetList = tweetList.filter((item) => !deleteTweetObject.retweets.includes(item.id))
+        console.log('tweetlist after taking out retweets', tweetList)
+    }
+
+    //if the tweet has no retweet, delete itself
+    tweetList = tweetList.filter((item) => item.id !=deleteID)
+
+
+    //show again
+    render(tweetList);
+    console.log(tweetList)
+
+ 
+   
+}
