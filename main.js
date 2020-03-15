@@ -312,5 +312,4 @@ function deleteTweet(deleteID){
     render(tweetList);
 }
 
-getTweetList();
 render(tweetList);
