@@ -1,14 +1,36 @@
 // let userList = [];
 
-let id=0;
-
+let id = 0;
 let tweetList = [];
 
+// Danny's Variables
+let page = 1
+let newsList = [];
+let apiKey = `c74225add6af4f70b0edb124c26f779e`;
+let todoList = [];
+let currentUser = "danny"  // let's a ssume the current user is danny (you will have to make it so that user can choose whatever the name)
+
+// Danny's Function
+let callAPI = async () => {
+    let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}&page=${page}`
+    let data = await fetch(url);
+    let result = await data.json();
+    console.log("data", data);
+    console.log("json", result)
+
+    newsList = newsList.concat(result.articles);
+    console.log('data', data);
+    console.log('json', result);
+    console.log('article list', newsList);
+
+    twitterRender(newsList)
+}
 
 
 //set the Areas
 let userNameInputArea = document.getElementById("userNameInputArea");
 let contentInputArea = document.getElementById("contentInputArea");
+
 // let userName;
 
 // //save data to local storage
@@ -27,9 +49,9 @@ let contentInputArea = document.getElementById("contentInputArea");
 // }
 
 let addButton = document.getElementById("tweetButton")
-addButton.addEventListener("click",addTweet);
+addButton.addEventListener("click", addTweet);
 //Add a tweet
-function addTweet(e){
+function addTweet(e) {
     e.preventDefault()
     let userName = userNameInputArea.value;
     let content = contentInputArea.value;
@@ -38,110 +60,22 @@ function addTweet(e){
         user: userName,
         content: content,
         timePosted: null,
-        isLiked: false,
-        comments: []
+        comments: [],
+        likes :[]
     }
-
-    tweetList.unshift(tweet);
-    console.log('tweetList:',tweetList);
+    tweetList.push(tweet);
+    console.log('tweetList:', tweetList);
     render(tweetList);
     id++
 }
+function checkIfUserHasLike(item){
+    return item.likes.includes(currentUser)  // item here is passed when called, item is a single tweet, and it has likes array inside. This function will return a BOOLEAN
+    // if already liked (true) we render "unlike" text, if not liked yet, render "like" 
+}
 
-function render(array){
+function render(array) { // wait, why do you have
     let htmlForTweet = array.map((item) => {
-        
-    //when tweet has comments. Print all the comments, then link with original tweet
-        if(item.comments && item.comments.length>0){
-            let htmlForComments = item.comments.map((comment) => {
-                console.log('comment.length:', item.comments.length)
-                console.log('comment.content:', comment.content)
-                return `<div class="retweet-container d-flex pb-3" style="width: 100%">
-                <div class="col-2">
-                </div>
-                <div class="col-10">
-                  <div class="card nguyen-card mt-3" style="width: 100%;">
-                      <div class="card-body nguyen-card-body d-flex justify-content-center">
-                          <div class="left col-2">
-                              <img src="logo.png" width="60px">
-                          </div>
-                          <div class="right col-10">
-                              <h5 class="card-title">Earl Pullara</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
-                              <p class="card-text">${comment.content}</p>
-                              <a href="#" class="card-link" onclick="toggleLike(${comment.id})">Like</a>
-                          </div>      
-                      </div>
-                    </div>
-                </div>
-            </div>`
-            }).join('')
-            
-            
-            return `<div class="card nguyen-card" style="width: 100%;">
-                <div class="card-body nguyen-card-body d-flex">
-                    <div class="left col-2">
-                        <img src="logo.png" width="90px">
-                    </div>
-                    <div class="right col-10">
-                        <h5 class="card-title">Earl Pullara</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
-                        <p class="card-text">${item.content}</p>
-                        <a href="#" class="card-link" onclick="toggleLike(${item.id})">Like</a>
-                        <a href="#" class="card-link" onclick="comment(${item.id})">Comment</a>
-                        <a href="#" class="card-link" onclick="retweet(${item.id})">Retweet</a>
-                        <a href="#" class="card-link" onclick="deleteTweet(${item.id})">Delete</a>
-                    </div>      
-                </div>
-              </div>` + htmlForComments;
-            }    
-
-    //when tweet has retweets
-        if('originTweetID' in item){
-            return `<form>
-            <div class="card nguyen-card" style="width: 100%;">
-                <div class="card-body nguyen-card-body d-flex">
-                    <div class="left col-2">
-                        <img src="logo.png" width="90px">
-                    </div>
-                    <div class="right col-10">
-                        <h5 class="card-title">Earl Pullara</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
-                        <p class="card-text">${item.retweetMessage}</p>
-                        <a href="#" class="card-link" onclick="toggleLike(${item.id})">Like</a>
-                        <a href="#" class="card-link" onclick="comment(${item.id})">Comment</a>
-                        <a href="#" class="card-link" onclick="retweet(${item.id})">Retweet</a>
-                        <a href="#" class="card-link" onclick="deleteTweet(${item.id})">Delete</a>
-                    </div>      
-                </div>
-              </div>
-
-              <div class="retweet-container d-flex pb-3" style="width: 100%">
-                  <div class="col-2">
-                  </div>
-                  <div class="col-10">
-                    <div class="card nguyen-card mt-3" style="width: 100%;">
-                        <div class="card-body nguyen-card-body d-flex justify-content-center">
-                            <div class="left col-2">
-                                <img src="logo.png" width="60px">
-                            </div>
-                            <div class="right col-10">
-                                <h5 class="card-title">Earl Pullara</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
-                                <p class="card-text">${item.originContent}</p>
-                                <a href="#" class="card-link" onclick="toggleLike(${item.originTweetID})">Like</a>
-                                <a href="#" class="card-link" onclick="comment(${item.originTweetID})">Comment</a>
-                                <a href="#" class="card-link" onclick="retweet(${item.originTweetID})">Retweet</a>
-                            </div>      
-                        </div>
-                      </div>
-                  </div>
-              </div>   
-            </form>`
-        }
-
-    //when tweet has neither retweet nor comment, print tweet.
-            return `<form>
+        return `<form>
         <div class="card nguyen-card" style="width: 100%;">
             <div class="card-body nguyen-card-body d-flex">
                 <div class="left col-2">
@@ -151,61 +85,89 @@ function render(array){
                     <h5 class="card-title">Earl Pullara</h5>
                     <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
                     <p class="card-text">${item.content}</p>
-                    <a href="#" class="card-link" onclick="toggleLike(${item.id})">Like</a>
-                    <a href="#" class="card-link" onclick="comment(${item.id})">Comment</a>
-                    <a href="#" class="card-link" onclick="retweet(${item.id})">Retweet</a>
-                    <a href="#" class="card-link" onclick="deleteTweet(${item.id})">Delete</a>
+                    <a href="#" class="card-link" onclick="toggleLike('${item.id}')">${ checkIfUserHasLike(item) ? "unlike" : "like"}</a>
+                    <a href="#" class="card-link" onclick="comment('${item.id}')">Comment</a>
+                    <a href="#" class="card-link" onclick="retweet('${item.id}')">Retweet</a>
+                    <a href="#" class="card-link" onclick="deleteTweet('${item.id}')">Delete</a>
                 </div>      
             </div>
           </div>
       </div>
-</form>`    
+</form>`
     }).join('')
-    document.getElementById("tweetArea").innerHTML=htmlForTweet
+    document.getElementById("tweetArea").innerHTML = htmlForTweet;
+
 }
+    
 
+let twitterRender = (array) => { 
+        let htmlForNews = array.map((item, index) => {
+            return `<div id="newsArea">
+           <img style="height: 125px;"
+           src="${item.urlToImage}"
+               alt="">
+           <div>
+               <h5>${item.title}</h5>
+               <p>${item.author}</p>
+               <a href="${item.url}">Get Full Coverage</a> 
+                <div>${item.description}</div>
+                <div>${moment(item.publishedAt, "YYYYMMDD").fromNow()}</div>
+           </div>   
+       </div> 
+       `;
+        }).join('')
 
-//when pressed Like
-function toggleLike(tweetID){
-//find the tweet
-//change the like to unlike
-}
-
-function retweet(originID){
-    let originTweet = tweetList.find((tweet) => tweet.id == originID);
-    console.log("originTweet",originTweet)
-    const retweetMessage = prompt('What do you think about this?');
-    let retweetObject = {
-        id: id,
-        originContent: originTweet.content,
-        originTweetID: originID,
-        retweetMessage: retweetMessage,
-        isLiked: false,
-        timePosted: null
+        document.getElementById('newsArea').innerHTML = htmlForNews;
     }
-    console.log("retweetObject",retweetObject);
-    tweetList.unshift(retweetObject);
-    render(tweetList);
-    console.log(tweetList);
-    id++
-}
+    callAPI()
 
-function deleteTweet(deleteID){
-    //filter OUT tweets without the deleteID -- both origin tweet and retweets
-    tweetList = tweetList.filter(tweet =>  tweet.id !== deleteID && tweet.originTweetID !== deleteID);
-    render(tweetList);
-}
+    function toggleLike(tweetID) {
+    
 
-function comment(originID){
-    let originTweet = tweetList.find(tweet => tweet.id == originID); //get the original tweet
-    let commentContent = prompt('Your comment:'); //get comment content
-    let commentObject = {
-        id: id,
-        content: commentContent,
-        originID: originID,
-        originContent: originTweet.content
+        let index = tweetList.findIndex(e=> e.id == tweetID);
+        // now instead of switching true false ( only work with 1 user). We now add the currentuser to the likes array ok
+        // but first define the like array first, go back to where we add a new tweet
+        // everytime user click this button, we check if that user already like this tweet or not. (using includes method)
+        
+
+        // if yes, we unlike by remove this user from the array
+        if(tweetList[index].likes.includes(currentUser))  // currentUser defined at the top
+        tweetList[index].likes = tweetList[index].likes.filter(e => e !== currentUser) // filter to keep only users that not match currentUser
+        // if no, we add this user to the like array
+        else 
+        tweetList[index].likes.push(currentUser) // pushing currentUser to likes array
+
+        render(tweetList) // now render
     }
-    originTweet.comments.push(commentObject); //push comment object into original tweet
-    render(tweetList);
-    id++
-}
+
+
+
+    
+
+    function retweet(originID) {
+        let originTweet = tweetList.filter((tweet) => tweet.id == originID);
+        let retweetObject = {
+            id: id,
+            content: originTweet[0].content,
+            originTweetID: originID,
+            isLiked: false,
+            timePosted: null
+        }
+        tweetList.push(retweetObject);
+        render(tweetList);
+        console.log(tweetList);
+        id++
+    }
+
+    function deleteTweet(deleteID) {
+        //filter OUT tweets without the deleteID -- both origin tweet and retweets
+        let tweetList = tweetList.find((tweet) => {
+            return tweet.id == !deleteID && tweet.originTweetID == !deleteID
+        });
+        render(tweetList);
+    }
+
+
+
+
+
