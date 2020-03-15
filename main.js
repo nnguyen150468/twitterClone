@@ -26,6 +26,29 @@ let contentInputArea = document.getElementById("contentInputArea");
 //     }
 // }
 
+function hashtagFilter(word){
+    let hashtagList = tweetList.filter(item => item.content.includes(word));
+    console.log('hashtagList:', hashtagList);
+    render(hashtagList);
+}
+
+function hashtagFormat(content){
+    let splitContent = content.split(' ')
+    console.log('splitContent:',splitContent);
+    
+    let contentHTML = splitContent.map(word => {
+        if (word.charAt(0) === "#"){
+            return `<span href="#" class="text-primary hashtag" onclick="hashtagFilter('${word}')">${word}</span>`
+        } 
+        if (word.charAt(0) ==="@"){
+            return `<a href="#">${word}</a>`
+        }
+        else return word;
+    }).join(' ');
+    console.log('contentHTML:',contentHTML);
+    return contentHTML;
+}
+
 let addButton = document.getElementById("tweetButton")
 addButton.addEventListener("click",addTweet);
 //Add a tweet
@@ -36,7 +59,7 @@ function addTweet(e){
     let tweet = {
         id: id,
         user: userName,
-        content: content,
+        content: hashtagFormat(content),
         timePosted: null,
         isLiked: false,
         comments: []
@@ -179,7 +202,7 @@ function retweet(originID){
         id: id,
         originContent: originTweet.content,
         originTweetID: originID,
-        retweetMessage: retweetMessage,
+        retweetMessage: hashtagFormat(retweetMessage),
         isLiked: false,
         timePosted: null
     }
@@ -201,7 +224,7 @@ function comment(originID){
     let commentContent = prompt('Your comment:'); //get comment content
     let commentObject = {
         id: id,
-        content: commentContent,
+        content: hashtagFormat(commentContent),
         originID: originID,
         originContent: originTweet.content
     }
