@@ -1,18 +1,18 @@
 .retweet-container {
-    background-color: rgb(245, 245, 245);
+    background-color:rgb(236, 244, 250);
 }
 
-#largest-container {
+/* #largest-container {
     border: 1px solid blue;
-}
+} */
 
 #left-container {
-    border: 1px solid green;
+    border: 1px solid lightgray;
     height: 500px;
 }
 
 #right-container { 
- border: 1px solid pink;
+ border: 1px solid lightgray;
 }
 
 

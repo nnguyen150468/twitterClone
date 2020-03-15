@@ -21,9 +21,9 @@
         </a>
         <div class="navbar-brand"><img src="twitter-circle.png" width="30" height="30" class="d-inline-block align-top" alt="">
             <input type="text" placeholder="your name" id="userNameInputArea">
-            <button onclick="addNewUser()">Sign In</button>
+            <button class="btn btn-outline-primary" id="signInArea" onclick="signIn()">Sign In</button>
         </div>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
     </nav>
     <!--Danny's Navbar End-->
 
@@ -37,9 +37,10 @@
                 <div class="form-group">
                     <div class="card  mb-3" style="width: 100%;">
                         <div class="card-body">
-                            <label for="content">What do you wanna tweet?</label>
+                            <label for="content" style="font-size: 1.2em">What's on your mind?</label>
                             <textarea class="form-control" id="contentInputArea" rows="3"></textarea>
-                            <div class="d-flex justify-content-end mt-3">
+                            <div class="d-flex justify-content-between mt-3">
+                                <span id="charCountArea" class="d-flex align-middle" style="font-size: 0.9em">140 characters left</span>
                                 <button class="btn btn-primary px-5" id="tweetButton" 
                                 style="border-radius: 20px">Tweet</button>
                             </div>

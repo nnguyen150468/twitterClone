@@ -1,7 +1,6 @@
-// let userList = [];
-
 let id = 0;
 let tweetList = [];
+let maxCount = 140;
 
 // Danny's Variables
 let page = 1
@@ -26,27 +25,50 @@ let callAPI = async () => {
     twitterRender(newsList)
 }
 
+function signIn(){
+    currentUser = userNameInputArea.value;
+    saveTweetList()
+}
 
 //set the Areas
 let userNameInputArea = document.getElementById("userNameInputArea");
 let contentInputArea = document.getElementById("contentInputArea");
 
-// let userName;
 
 // //save data to local storage
-// function saveUser(){
-//     let str = JSON.stringify(userList);
-//     localStorage.setItem("userList", str);
+// function saveTweetList(){
+//     let str = JSON.stringify(tweetList);
+//     localStorage.setItem("tweetList", str);
 // }
 
 // //get data from local storage
-// function getUser(){
-//     let str = localStorage.getItem("userList");
-//     userList = JSON.parse(str);
-//     if(!userList){
-//         userList=[]
+// function getTweetList(){
+//     let str = localStorage.getItem("tweetList");
+//     tweetList = JSON.parse(str);
+//     if(!tweetList){
+//         tweetList=[]
 //     }
 // }
+
+let countLetter = () => {
+    let remain = maxCount - contentInputArea.value.length;
+    let charCountArea = document.getElementById('charCountArea');
+    let tweetButton = document.getElementById('tweetButton');
+    charCountArea.innerHTML=`${remain} characters left`;
+    
+
+    if (remain == 1){
+        charCountArea.innerHTML=`${remain} character left`;
+    } else if(remain < 0){
+        tweetButton.disabled = true;
+        charCountArea.style.color = "red";
+    } else if (remain >= 0){
+        tweetButton.disabled = false;
+        charCountArea.style.color = "black";
+    }
+}
+
+contentInputArea.addEventListener("input", countLetter);
 
 function hashtagFilter(word){
     let hashtagList = tweetList.filter(item => item.content.includes(word));
@@ -76,11 +98,10 @@ addButton.addEventListener("click", addTweet);
 //Add a tweet
 function addTweet(e) {
     e.preventDefault()
-    let userName = userNameInputArea.value;
     let content = contentInputArea.value;
     let tweet = {
         id: id,
-        user: userName,
+        user: currentUser,
         content: hashtagFormat(content),
         timePosted: null,
         comments: [],
@@ -88,6 +109,8 @@ function addTweet(e) {
     }
     tweetList.unshift(tweet);
     console.log('tweetList:', tweetList);
+    contentInputArea.value = "";
+    charCountArea.innerHTML=`${maxCount} characters left`;
     render(tweetList);
     id++
 }
@@ -115,8 +138,8 @@ function render(array){
                               <img src="logo.png" width="60px">
                           </div>
                           <div class="right col-10">
-                              <h5 class="card-title">Earl Pullara</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
+                              <h5 class="card-title">${currentUser}</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
                               <p class="card-text">${comment.content}</p>
                               </div>      
                       </div>
@@ -132,13 +155,13 @@ function render(array){
                         <img src="logo.png" width="90px">
                     </div>
                     <div class="right col-10">
-                        <h5 class="card-title">Earl Pullara</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
+                        <h5 class="card-title">${currentUser}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
                         <p class="card-text">${item.content}</p>
                         <a href="#" class="card-link" onclick="toggleLike('${item.id}')">${ checkIfUserHasLike(item) ? "Unlike" : "Like"}</a>
                         <a href="#" class="card-link" onclick="comment('${item.id}')">Comment</a>
                         <a href="#" class="card-link" onclick="retweet('${item.id}')">Retweet</a>
-                        <a href="#" class="card-link" onclick="deleteTweet('${item.id}')">Delete</a>
+                        <a href="#" class="card-link" onclick="deleteTweet(${item.id})">Delete</a>
                     </div>      
                 </div>
               </div>` + htmlForComments;
@@ -153,13 +176,13 @@ function render(array){
                         <img src="logo.png" width="90px">
                     </div>
                     <div class="right col-10">
-                        <h5 class="card-title">Earl Pullara</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
+                        <h5 class="card-title">${currentUser}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
                         <p class="card-text">${item.retweetMessage}</p>
                         <a href="#" class="card-link" onclick="toggleLike('${item.id}')">${ checkIfUserHasLike(item) ? "Unlike" : "Like"}</a>
                         <a href="#" class="card-link" onclick="comment('${item.id}')">Comment</a>
                         <a href="#" class="card-link" onclick="retweet('${item.id}')">Retweet</a>
-                        <a href="#" class="card-link" onclick="deleteTweet('${item.id}')">Delete</a>
+                        <a href="#" class="card-link" onclick="deleteTweet(${item.id})">Delete</a>
                     </div>      
                 </div>
               </div>
@@ -192,13 +215,13 @@ function render(array){
                     <img src="logo.png" width="90px"> 
                 </div>
                 <div class="right col-10">
-                    <h5 class="card-title">Earl Pullara</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
+                    <h5 class="card-title">${currentUser}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
                     <p class="card-text">${item.content}</p>
                     <a href="#" class="card-link" onclick="toggleLike('${item.id}')">${ checkIfUserHasLike(item) ? "Unlike" : "Like"}</a>
                     <a href="#" class="card-link" onclick="comment('${item.id}')">Comment</a>
                     <a href="#" class="card-link" onclick="retweet('${item.id}')">Retweet</a>
-                    <a href="#" class="card-link" onclick="deleteTweet('${item.id}')">Delete</a>
+                    <a href="#" class="card-link" onclick="deleteTweet(${item.id})">Delete</a>
                 </div>      
             </div>
           </div>
@@ -212,16 +235,16 @@ function render(array){
 
 let twitterRender = (array) => { 
         let htmlForNews = array.map((item, index) => {
-            return `<div id="newsArea">
-           <img style="height: 125px;"
+            return `<div id="newsArea" style="padding: 1em; border-top: 1px solid #D3D3D3; background-color: rgb(250,250,250)">
+           <img style="height: 70px; margin-bottom: 1em"
            src="${item.urlToImage}"
                alt="">
            <div>
-               <h5>${item.title}</h5>
-               <p>${item.author}</p>
-               <a href="${item.url}">Get Full Coverage</a> 
-                <div>${item.description}</div>
-                <div>${moment(item.publishedAt, "YYYYMMDD").fromNow()}</div>
+               <h5 style="font-size: 1em">${item.title}</h5>
+               <div style="font-style: italic; font-size: 0.8em">${item.author}</div>
+               <a href="${item.url}" style="font-size:0.7em">Get Full Coverage</a> 
+                <div style="font-size: 0.9em">${item.description}</div>
+                <div style="font-size: 0.7em">${moment(item.publishedAt, "YYYYMMDD").fromNow()}</div>
            </div>   
        </div> 
        `;
@@ -244,7 +267,6 @@ function toggleLike(tweetID) {
     }  // currentUser defined at the top   // if no, we add this user to the like array
     else 
     targetTweet.likes.push(currentUser) // pushing currentUser to likes array
-
     render(tweetList) // now render
 }       
 
@@ -286,5 +308,9 @@ function comment(originID){
 function deleteTweet(deleteID){
     //filter OUT tweets without the deleteID -- both origin tweet and retweets
     tweetList = tweetList.filter(tweet =>  tweet.id !== deleteID && tweet.originTweetID !== deleteID);
+    console.log(tweetList);
     render(tweetList);
 }
+
+getTweetList();
+render(tweetList);
