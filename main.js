@@ -3,11 +3,11 @@ let tweetList = [];
 let maxCount = 140;
 
 // Danny's Variables
-let page = 1
+let page = 1;
 let newsList = [];
 let apiKey = `c74225add6af4f70b0edb124c26f779e`;
 let todoList = [];
-let currentUser = "danny"  // let's a ssume the current user is danny (you will have to make it so that user can choose whatever the name)
+let currentUser = "danny" 
 
 // Danny's Function
 let callAPI = async () => {
