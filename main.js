@@ -9,7 +9,7 @@ let apiKey = `c74225add6af4f70b0edb124c26f779e`;
 let todoList = [];
 let currentUser = "danny" 
 
-// Danny's Function
+// Danny's Function. Get Google API for Trending
 let callAPI = async () => {
     let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}&page=${page}`
     let data = await fetch(url);
