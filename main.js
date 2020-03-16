@@ -35,20 +35,26 @@ let userNameInputArea = document.getElementById("userNameInputArea");
 let contentInputArea = document.getElementById("contentInputArea");
 
 
-// //save data to local storage
-// function saveTweetList(){
-//     let str = JSON.stringify(tweetList);
-//     localStorage.setItem("tweetList", str);
-// }
+//save data to local storage
+async function saveTweetList(data){
+    const res = await fetch("https://api.myjson.com/bins/1e20l6", {
+        method: "PUT",
+        body: JSON.stringify(data),
+        headers: {
+            'Content-Type': 'application/json'
+          }
+    });
+    const result =  await res.json();
+    console.log(result)
+}
 
-// //get data from local storage
-// function getTweetList(){
-//     let str = localStorage.getItem("tweetList");
-//     tweetList = JSON.parse(str);
-//     if(!tweetList){
-//         tweetList=[]
-//     }
-// }
+//get data from local storage
+async function getTweetList(){
+   const res = await fetch("https://api.myjson.com/bins/1e20l6");
+   const data = await res.json()
+   console.log(data)
+   return data || []
+}
 
 let countLetter = () => {
     let remain = maxCount - contentInputArea.value.length;
@@ -120,7 +126,8 @@ function checkIfUserHasLike(item){
     // if already liked (true) we render "unlike" text, if not liked yet, render "like" 
 }    
 
-function render(array){
+async function render(array){
+    await saveTweetList(array)
     let htmlForTweet = array.map((item) => {
         
     //when tweet has comments. Print all the comments, then link with original tweet
@@ -138,8 +145,8 @@ function render(array){
                               <img src="logo.png" width="60px">
                           </div>
                           <div class="right col-10">
-                              <h5 class="card-title">${currentUser}</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
+                              <h5 class="card-title">${comment.user}</h5>
+                              <h6 class="card-subtitle mb-2 text-muted">@${comment.user}</h6>
                               <p class="card-text">${comment.content}</p>
                               </div>      
                       </div>
@@ -155,8 +162,8 @@ function render(array){
                         <img src="logo.png" width="90px">
                     </div>
                     <div class="right col-10">
-                        <h5 class="card-title">${currentUser}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
+                        <h5 class="card-title">${item.user}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@${item.user}</h6>
                         <p class="card-text">${item.content}</p>
                         <a href="#" class="card-link" onclick="toggleLike('${item.id}')">${ checkIfUserHasLike(item) ? "Unlike" : "Like"}</a>
                         <a href="#" class="card-link" onclick="comment('${item.id}')">Comment</a>
@@ -176,8 +183,8 @@ function render(array){
                         <img src="logo.png" width="90px">
                     </div>
                     <div class="right col-10">
-                        <h5 class="card-title">${currentUser}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
+                        <h5 class="card-title">${item.user}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@${item.user}</h6>
                         <p class="card-text">${item.retweetMessage}</p>
                         <a href="#" class="card-link" onclick="toggleLike('${item.id}')">${ checkIfUserHasLike(item) ? "Unlike" : "Like"}</a>
                         <a href="#" class="card-link" onclick="comment('${item.id}')">Comment</a>
@@ -196,7 +203,7 @@ function render(array){
                                 <img src="logo.png" width="60px">
                             </div>
                             <div class="right col-10">
-                                <h5 class="card-title">Earl Pullara</h5>
+                                <h5 class="card-title">${item.originUser}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">@earlpullara</h6>
                                 <p class="card-text">${item.originContent}</p>
                             </div>      
@@ -215,8 +222,8 @@ function render(array){
                     <img src="logo.png" width="90px"> 
                 </div>
                 <div class="right col-10">
-                    <h5 class="card-title">${currentUser}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">@${currentUser}</h6>
+                    <h5 class="card-title">${item.user}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@${item.user}</h6>
                     <p class="card-text">${item.content}</p>
                     <a href="#" class="card-link" onclick="toggleLike('${item.id}')">${ checkIfUserHasLike(item) ? "Unlike" : "Like"}</a>
                     <a href="#" class="card-link" onclick="comment('${item.id}')">Comment</a>
@@ -278,10 +285,12 @@ function retweet(originID){
         id: id,
         originContent: originTweet.content,
         originTweetID: originID,
+        originUser: originTweet.user,
         retweetMessage: retweetMessage,
         isLiked: false,
         timePosted: null,
-        likes: []
+        likes: [],
+        user: currentUser
     }
     console.log("retweetObject",retweetObject);
     tweetList.unshift(retweetObject);
@@ -298,7 +307,9 @@ function comment(originID){
         content: commentContent,
         originID: originID,
         originContent: originTweet.content,
-        likes: []
+        originUser: originTweet.user,
+        likes: [],
+        user: currentUser
     }
     originTweet.comments.push(commentObject); //push comment object into original tweet
     render(tweetList);
@@ -312,4 +323,9 @@ function deleteTweet(deleteID){
     render(tweetList);
 }
 
-render(tweetList);
+async function runApp(){
+    tweetList = await getTweetList()
+    render(tweetList);
+}
+
+runApp()
