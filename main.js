@@ -1,3 +1,4 @@
+
 let id = 0;
 let tweetList = [];
 let maxCount = 140;
@@ -8,6 +9,9 @@ let newsList = [];
 let apiKey = `c74225add6af4f70b0edb124c26f779e`;
 let todoList = [];
 let currentUser = "danny"
+
+
+$('#spinner').show();
 
 // Danny's Function. Get Google API for Trending
 let callAPI = async () => {
@@ -131,7 +135,7 @@ function checkIfUserHasLike(item) {
 async function render(array) {
     await saveTweetList(array)
     let htmlForTweet = array.map((item) => {
-
+        $('#spinner').hide();
         //when tweet has comments. Print all the comments, then link with original tweet
         if (item.comments && item.comments.length > 0) {
             let htmlForComments = item.comments.map((comment) => {

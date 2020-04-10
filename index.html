@@ -10,12 +10,20 @@
        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
          <link rel="stylesheet" href="style.css">
+         <style type="text/css" media="screen" >
+            #spinner {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+            }
+         </style>
 </head>
 
 <body>
     <!-- Danny's Navbar Start -->
     <nav class="navbar navbar-light bg-light">
       
+      </div>
       
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
     </nav>
@@ -70,7 +78,8 @@
                     </div>
             </form>
 
-            <div id="tweetArea"></div>
+            <div id="tweetArea"><div id="spinner" style="display:none;">
+                <img id="img-spinner" src="spinner.gif" alt="loading"></div>
             <!-- <form>
                     <div class="card nguyen-card" style="width: 100%;">
                         <div class="card-body nguyen-card-body d-flex">
@@ -133,6 +142,11 @@
     <!-- Nguyen's body ends here. -->
 
     <!-- Danny's Footer Start  -->
+    <!-- <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+    <div class="d-flex justify-content-center">
+        <div style="height:350px" class="col-md-6" id="breaker"></div>
+    </div>
+
     <div style="background-color: #1DA1F2; color:White; text-align: center; padding: 1em">Get connected with your friends!
     
     </div>
@@ -178,7 +192,7 @@
     </footer>
 
     <!-- Danny's Footer End -->
-
+    <script type="module" src="node_modules/spin.js/spin.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>

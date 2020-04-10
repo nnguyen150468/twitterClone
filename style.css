@@ -19,15 +19,20 @@
     
 }
 
-
-/* .footer {
+/* 
+footer {
     margin-top: 6em;
     position: fixed;
     bottom: 0;
     padding-top: 2em;
-    background-color: purple;
+    
     width: 100%;
 } */
+
+#breaker {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
 
 .footer-1 {
     display: flex;
