@@ -117,6 +117,8 @@ function addTweet(e) {
     console.log('tweetList:', tweetList);
     contentInputArea.value = "";
     charCountArea.innerHTML = `${maxCount} characters left`;
+    saveTweetList(tweetList);
+    getTweetList();
     render(tweetList);
     id++
 }
@@ -142,7 +144,7 @@ async function render(array) {
                   <div class="card nguyen-card mt-3" style="width: 100%;">
                       <div class="card-body nguyen-card-body d-flex justify-content-center">
                           <div class="left col-2">
-                              <img src="logo.png" width="60px">
+                              <img src="logo.png" style="max-width:100%">
                           </div>
                           <div class="right col-10">
                               <h5 class="card-title">${comment.user}</h5>
@@ -159,7 +161,7 @@ async function render(array) {
             return `<div class="card nguyen-card" style="width: 100%;">
                 <div class="card-body nguyen-card-body d-flex">
                     <div class="left col-2">
-                        <img src="logo.png" width="90px">
+                        <img src="logo.png" style="max-width:100%;">
                     </div>
                     <div class="right col-10">
                         <h5 class="card-title">${item.user}</h5>
@@ -180,7 +182,7 @@ async function render(array) {
             <div class="card nguyen-card" style="width: 100%;">
                 <div class="card-body nguyen-card-body d-flex">
                     <div class="left col-2">
-                        <img src="logo.png" width="90px">
+                        <img src="logo.png" style="max-width:100%">
                     </div>
                     <div class="right col-10">
                         <h5 class="card-title">${item.user}</h5>
@@ -219,7 +221,7 @@ async function render(array) {
         <div class="card nguyen-card" style="width: 100%;">
             <div class="card-body nguyen-card-body d-flex">
                 <div class="left col-2">
-                    <img src="logo.png" width="90px"> 
+                    <img src="logo.png" style="max-width:100%"> 
                 </div>
                 <div class="right col-10">
                     <h5 class="card-title">${item.user}</h5>
@@ -247,10 +249,10 @@ let twitterRender = (array) => {
            src="${item.urlToImage}"
                alt="">
            <div>
-               <h5 style="font-size: 1em">${item.title}</h5>
-               <div style="font-style: italic; font-size: 0.8em">${item.author}</div>
-               <a href="${item.url}" style="font-size:0.7em">Get Full Coverage</a> 
-                <div style="font-size: 0.9em">${item.description}</div>
+               <h5 style="font-size: 0.9em">${item.title}</h5>
+               <div style="font-style: italic; font-size: 0.5em">${item.author}</div>
+               <a href="${item.url}" style="font-size:0.5em">Get Full Coverage</a> 
+                <div style="font-size: 0.7em">${item.description}</div>
                 <div style="font-size: 0.7em">${moment(item.publishedAt, "YYYYMMDD").fromNow()}</div>
            </div>   
        </div> 

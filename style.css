@@ -6,13 +6,17 @@
     border: 1px solid blue;
 } */
 
-#left-container {
-    border: 1px solid lightgray;
-    height: 500px;
+#left-sidebar {
+    left: 0;
+    z-index: 1;
+    position: fixed;
+    overflow-x: hidden;
+    padding-top: 20px;
+    
 }
 
 #right-container { 
- border: 1px solid lightgray;
+    
 }
 
 
@@ -51,10 +55,11 @@
 }
 
 .li-edit {
-    line-height: 1.5;
+    line-height: 1.8;
     font-family: Circular, spotify-circular, Helvetica, Arial, sans-serif;
     padding: 3px 0 15px;
     font-weight: 700;
+    font-size: 1.15em
 }
 
 .li-edit:hover {

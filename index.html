@@ -15,14 +15,8 @@
 <body>
     <!-- Danny's Navbar Start -->
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <img src="Twitter.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            Twitter Clone Project
-        </a>
-        <div class="navbar-brand"><img src="twitter-circle.png" width="30" height="30" class="d-inline-block align-top" alt="">
-            <input type="text" placeholder="your name" id="userNameInputArea">
-            <button class="btn btn-outline-primary" id="signInArea" onclick="signIn()">Sign In</button>
-        </div>
+      
+      
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
     </nav>
     <!--Danny's Navbar End-->
@@ -30,33 +24,47 @@
 
     <!-- Nguyen's body starts -->
     <div id="largest-container" class="d-flex">
-        <section id="left-container" class="col-3">
-            <ul class="ul-footer col-3">
-                <li class="li-edit"><i class="fa fa-home"></i>Home</li>
-                <li class="li-edit"><i class="fa fa-hashtag"></i>Explore</li>
-                <li class="li-edit"><i class="fa fa-bell"></i>Notifications</li>
-                <li class="li-edit"><i class="fa fa-envelope"></i>Messages</li>
-                <li class="li-edit"><i class="fa fa-bookmark"></i>Bookmarks</li>
-                <li class="li-edit"><i class="fa fa-list-alt"></i>Lists</li>
-                <li class="li-edit"><i class="fa fa-bullseye"></i>Profile</li>
-                <li class="li-edit"><i class="fa fa-ellipsis-h"></i>More</li>
+        <section id="left-container" class="col-md-3 col-sm-4">
+            <div id="left-sidebar" class="container col-3 d-flex flex-column align-items-center">
+            <ul class="ul-footer col-6" >
+                <li class="li-edit">  <a class="navbar-brand" href="#">
+                    <img src="Twitter.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    
+                </a></li>
+                <li class="li-edit"><i class="fa fa-home fa-lg mr-4"></i>Home</li>
+                <li class="li-edit"><i class="fa fa-hashtag fa-lg mr-4"></i>Explore</li>
+                <li class="li-edit"><i class="fa fa-bell fa-lg mr-4"></i>Notifications</li>
+                <li class="li-edit"><i class="fa fa-envelope fa-lg mr-4"></i>Messages</li>
+                <li class="li-edit"><i class="fa fa-bookmark fa-lg mr-4"></i>Bookmarks</li>
+                <li class="li-edit"><i class="fa fa-list-alt fa-lg mr-4"></i>Lists</li>
+                <li class="li-edit"><i class="fa fa-bullseye fa-lg mr-4"></i>Profile</li>
+                <li class="li-edit"><i class="fa fa-ellipsis-h fa-lg mr-4"></i>More</li>
             </ul>
-            <button class="btn btn-primary px-5"  
-            style="border-radius: 20px">Followers</button>
+            <button class="btn btn-primary px-5 py-3 w-75"  
+            style="border-radius: 30px">Followers</button>
+        </div>
         </section>
 
-        <section id="main-container" class="col-6">
+        <section id="main-container" class="col-md-6 col-sm-8 border-left border-right">
             <form>
                 <div class="form-group">
                     <div class="card  mb-3" style="width: 100%;">
                         <div class="card-body">
-                            <label for="content" style="font-size: 1.2em">What's on your mind?</label>
-                            <textarea class="form-control" id="contentInputArea" rows="3"></textarea>
-                            <div class="d-flex justify-content-between mt-3">
-                                <span id="charCountArea" class="d-flex align-middle" style="font-size: 0.9em">140 characters left</span>
-                                <button class="btn btn-primary px-5" id="tweetButton" 
-                                style="border-radius: 20px">Tweet</button>
+                            <div class="row">
+                                <div class="col-2">
+                                    <img src="logo.png" style="max-width: 100%;">
+                                </div>
+                                <div class="col-10">
+                                    <label for="content" style="font-size: 1.2em">What's on your mind?</label>
+                                    <textarea class="form-control" id="contentInputArea" rows="3"></textarea>
+                                    <div class="d-flex justify-content-between mt-3">
+                                        <span id="charCountArea" class="d-flex align-middle" style="font-size: 0.9em">140 characters left</span>
+                                        <button class="btn btn-primary px-5" id="tweetButton" 
+                                        style="border-radius: 20px">Tweet</button>
+                                    </div>
+                                </div>
                             </div>
+                         
                         </div>
                     </div>
                     </div>
@@ -109,9 +117,15 @@
 
 
 <!-- Danny's Twitter Feed  -->
-        <section id="right-container" class="col-3">
-            <h2>Trending for You</h2>
+        <section id="right-container" class="col-lg-3 col-sm-0">
+            <div class="col-10">
+                <div class="navbar-brand"><img src="twitter-circle.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <input type="text" placeholder="your name" id="userNameInputArea">
+                    <button class="btn btn-outline-primary" id="signInArea" onclick="signIn()">Sign In</button>
+                </div>
+                <h5>Trending for You</h5>
             <div id="newsArea">A div. Trending Area</div>
+        </div>
         </section>
     </div>
 <!-- Danny's Twitter Feed -->
