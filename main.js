@@ -1,4 +1,5 @@
 
+
 let id = 0;
 let tweetList = [];
 let maxCount = 140;
@@ -6,16 +7,17 @@ let maxCount = 140;
 // Danny's Variables
 let page = 1;
 let newsList = [];
-let apiKey = `c74225add6af4f70b0edb124c26f779e`;
 let todoList = [];
 let currentUser = "danny"
-
+const apiKey = "90f4a1f538404bc08031f88b76d1fe9c"
 
 $('#spinner').show();
 
 // Danny's Function. Get Google API for Trending
 let callAPI = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}&page=${page}`
+    console.log('try')
+    // let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}&page=${page}`
+    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
     let data = await fetch(url);
     let result = await data.json();
     console.log("data", data);
