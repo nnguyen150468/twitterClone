@@ -7,7 +7,7 @@
     <title>Twitter</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-       
+       <link rel="shortcut icon" href="Twitter.png" type="image/x-icon">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
          <link rel="stylesheet" href="style.css">
          <style type="text/css" media="screen" >
@@ -36,10 +36,10 @@
             <div id="left-sidebar" class="container col-3 d-flex flex-column align-items-center">
             <ul class="ul-footer col-6" >
                 <li class="li-edit">  <a class="navbar-brand" href="#">
-                    <img src="Twitter.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    <img src="Twitter.png" width="30" height="30" class="d-inline-block align-top" alt="twitter-logo">
                     
                 </a></li>
-                <li class="li-edit"><i class="fa fa-home fa-lg mr-4"></i>Home</li>
+                <li class="li-edit" style="color: #1DA1F2"><i class="fa fa-home fa-lg mr-4"></i>Home</li>
                 <li class="li-edit"><i class="fa fa-hashtag fa-lg mr-4"></i>Explore</li>
                 <li class="li-edit"><i class="fa fa-bell fa-lg mr-4"></i>Notifications</li>
                 <li class="li-edit"><i class="fa fa-envelope fa-lg mr-4"></i>Messages</li>
@@ -127,13 +127,53 @@
 
 <!-- Danny's Twitter Feed  -->
         <section id="right-container" class="col-lg-3 col-sm-0">
-            <div class="col-10">
-                <div class="navbar-brand"><img src="twitter-circle.png" width="30" height="30" class="d-inline-block align-top" alt="">
-                    <input type="text" placeholder="your name" id="userNameInputArea">
-                    <button class="btn btn-outline-primary" id="signInArea" onclick="signIn()">Sign In</button>
-                </div>
-                <h5>Trending for You</h5>
-            <div id="newsArea">A div. Trending Area</div>
+            <div class="col-12">
+                
+                    <input type="text" class="col-12 mt-3" placeholder="Search Twitter" id="searchBar">
+                
+                
+            <div id="newsArea" class="col-12 mt-4">
+                <table class="table table-hover">
+                    <tr>
+                        <h4  class="pt-3">Trends for You</h5>
+                    </tr>
+                    <tr>
+                        <td>
+                            <small class="text-muted">Trending worldwide</small>
+                            <div class="font-weight-bold">#WorldNews</div>
+                            <div class="text-muted">125K Tweets</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <small class="text-muted">kpop · Trending</small>
+                            <div class="font-weight-bold">WE LOVE YOU 3270</div>
+                            <div class="text-muted">125K Tweets</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <small class="text-muted">Trending worldwide</small>
+                            <div class="font-weight-bold">#BlackOutTuesday</div>
+                            <div class="text-muted">772K Tweets</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <small class="text-muted">Trending in Vietnam</small>
+                            <div class="font-weight-bold">#คุณหนูขี้อายกับคุณชายเจ้าชู้</div>
+                            <div class="text-muted">120K Tweets</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <small class="text-muted">Trending in Vietnam</small>
+                            <div class="font-weight-bold">COVID-19</div>
+                            <div class="text-muted">1.6M Tweets</div>
+                        </td>
+                    </tr>
+                    </table>
+            </div>
         </div>
         </section>
     </div>

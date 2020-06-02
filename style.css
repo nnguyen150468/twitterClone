@@ -2,9 +2,14 @@
     background-color:rgb(236, 244, 250);
 }
 
-/* #largest-container {
-    border: 1px solid blue;
-} */
+button {
+    background-color: #1DA1F2 !important;
+    font-weight: bold !important;
+}
+
+button:hover {
+    background-color: rgb(0, 124, 201) !important;
+}
 
 #left-sidebar {
     left: 0;
@@ -12,10 +17,6 @@
     position: fixed;
     overflow-x: hidden;
     padding-top: 20px;
-    
-}
-
-#right-container { 
     
 }
 
@@ -102,4 +103,30 @@ footer {
 
 .hashtag:hover {
     text-decoration: underline
+}
+
+#newsArea {
+    background-color: #F5F8FA;
+}
+
+#right-container {
+    position: fixed;
+    right: 2em;
+    width: 330px;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#searchBar {
+    background-color: #E1E8ED;
+    border: none;
+    border-radius: 15px;
+    height: 2.5em
+}
+
+#searchBar:focus {
+    outline: none
 }

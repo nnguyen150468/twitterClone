@@ -17,7 +17,7 @@ $('#spinner').show();
 let callAPI = async () => {
     console.log('try')
     // let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${apiKey}&page=${page}`
-    let url = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`
+    let url = `https://api.twitter.com/1.1/trends/place.json?id=1`
     let data = await fetch(url);
     let result = await data.json();
     console.log("data", data);
