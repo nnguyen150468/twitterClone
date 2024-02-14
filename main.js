@@ -16,7 +16,7 @@ const dev_mode = LIVE_MODE;
 //   dev_mode == LIVE_MODE ? process.env.SERVER_HOST : process.env.LOCAL_HOST;
 
 // const SERVER = "http://localhost:4000/graphql";
-const SERVER = "https://nguyen-twitter.onrender.com/graphql";
+// const SERVER = "https://nguyen-twitter.onrender.com/graphql";
 $("#spinner").show();
 
 // Danny's Function. Get Google API for Trending
@@ -48,7 +48,7 @@ let contentInputArea = document.getElementById("contentInputArea");
 //save data to local storage
 async function saveTweetList(data) {
   //   const SERVER_1 = "http://localhost:4000/graphql";
-  const query = `mutation MyMutation($tweets: [String]) {
+  const query = `mutation MyMutation($tweets: [TweetInput]) {
         updateTweets(tweets: $tweets)
       }`;
   const res = await fetch(SERVER, {
@@ -79,7 +79,8 @@ async function getTweetList() {
       query: "{ tweets { id, user, content, timePosted, comments, likes } }",
     }),
   });
-  const data = await res.json();
+  const res_data = await res.json();
+  const { data } = res_data;
   const { tweets } = data;
   return tweets || [];
 }
