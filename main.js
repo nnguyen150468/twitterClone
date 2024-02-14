@@ -12,8 +12,11 @@ const apiKey = "90f4a1f538404bc08031f88b76d1fe9c";
 const DEVELOPMENT_MODE = 0;
 const LIVE_MODE = 1;
 const dev_mode = LIVE_MODE;
-const SERVER =
-  dev_mode == LIVE_MODE ? process.env.SERVER_HOST : process.env.LOCAL_HOST;
+// const SERVER =
+//   dev_mode == LIVE_MODE ? process.env.SERVER_HOST : process.env.LOCAL_HOST;
+
+// const SERVER = "http://localhost:4000/graphql";
+const SERVER = "https://nguyen-twitter.onrender.com/graphql";
 $("#spinner").show();
 
 // Danny's Function. Get Google API for Trending
