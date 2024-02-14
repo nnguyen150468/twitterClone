@@ -16,7 +16,7 @@ const dev_mode = LIVE_MODE;
 //   dev_mode == LIVE_MODE ? process.env.SERVER_HOST : process.env.LOCAL_HOST;
 
 // const SERVER = "http://localhost:4000/graphql";
-// const SERVER = "https://nguyen-twitter.onrender.com/graphql";
+const SERVER = "https://nguyen-twitter.onrender.com/graphql";
 $("#spinner").show();
 
 // Danny's Function. Get Google API for Trending
